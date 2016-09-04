@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="New ToggleButton"
         android:id="@+id/botonTipoCena"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/stringTitulo"
         android:layout_alignParentStart="true"
         android:textOn="@string/textoBotonReservarMesa"
         android:textOff="@string/textoBotonDelivery"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/titulo"
-        android:id="@+id/textView3"
+        android:id="@+id/stringTitulo"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 

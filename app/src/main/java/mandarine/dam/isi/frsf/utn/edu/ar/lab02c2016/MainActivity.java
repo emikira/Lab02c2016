@@ -34,16 +34,16 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private ElementoMenu[] listaPlatos;
     private ElementoMenu[] listaPostre;
     private ArrayList<ElementoMenu> listaElementos;
-    private ToggleButton botonTipoPedido = (ToggleButton) findViewById(R.id.botonTipoCena);
-    private TextView textoPedidos = (TextView) findViewById(R.id.textoPedidos);
-    private Button botonAgregar = (Button) findViewById(R.id.buttonAgregar);
-    private Button botonConfirmar = (Button) findViewById(R.id.buttonConfirmar);
-    private Button botonReiniciar = (Button) findViewById(R.id.buttonReiniciar);
-    private ListView listaProductos = (ListView) findViewById(R.id.listViewProductos);
-    private RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-    private RadioButton radioButtonPlato = (RadioButton) findViewById(R.id.radioButtonComida);
-    private RadioButton radioButtonPostre = (RadioButton) findViewById(R.id.radioButtonPostre);
-    private RadioButton radioButtonBebida = (RadioButton) findViewById(R.id.radioButtonBebida);
+    private ToggleButton botonTipoPedido;
+    private TextView textoPedidos;
+    private Button botonAgregar;
+    private Button botonConfirmar;
+    private Button botonReiniciar;
+    private ListView listaProductos;
+    private RadioGroup radioGroup;
+    private RadioButton radioButtonPlato;
+    private RadioButton radioButtonPostre;
+    private RadioButton radioButtonBebida;
 
     private ArrayAdapter<ArrayList> adaptador;
 
@@ -52,6 +52,18 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        botonTipoPedido = (ToggleButton) findViewById(R.id.botonTipoCena);
+        textoPedidos = (TextView) findViewById(R.id.textoPedidos);
+        botonAgregar = (Button) findViewById(R.id.buttonAgregar);
+        botonConfirmar = (Button) findViewById(R.id.buttonConfirmar);
+        botonReiniciar = (Button) findViewById(R.id.buttonReiniciar);
+        listaProductos = (ListView) findViewById(R.id.listViewProductos);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioButtonPlato = (RadioButton) findViewById(R.id.radioButtonComida);
+        radioButtonPostre = (RadioButton) findViewById(R.id.radioButtonPostre);
+        radioButtonBebida = (RadioButton) findViewById(R.id.radioButtonBebida);
+
 
         adaptador = new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,listaElementos);
 
