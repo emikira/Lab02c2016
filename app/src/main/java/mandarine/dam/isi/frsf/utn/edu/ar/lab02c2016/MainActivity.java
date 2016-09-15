@@ -1,10 +1,7 @@
 package mandarine.dam.isi.frsf.utn.edu.ar.lab02c2016;
 
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,17 +11,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
-
-
-import org.w3c.dom.Text;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
+
+import static android.R.layout.simple_spinner_item;
 
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, AdapterView.OnItemClickListener{
@@ -34,18 +27,21 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private ElementoMenu[] listaPlatos;
     private ElementoMenu[] listaPostre;
     private ArrayList<ElementoMenu> listaElementos;
+    private ArrayList<String> listaHorarios;
     private ToggleButton botonTipoPedido;
     private TextView textoPedidos;
     private Button botonAgregar;
     private Button botonConfirmar;
     private Button botonReiniciar;
-    private ListView listaProductos;
+    private Spinner spinnerHorarios;
+    private ListView listViewListaProductos;
     private RadioGroup radioGroup;
     private RadioButton radioButtonPlato;
     private RadioButton radioButtonPostre;
     private RadioButton radioButtonBebida;
 
-    private ArrayAdapter<ArrayList> adaptador;
+    private ArrayAdapter<ArrayList> adaptadorListView;
+    private ArrayAdapter<CharSequence> adaptadorSpinner;
 
 
     @Override
@@ -53,26 +49,34 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        listaElementos = new ArrayList<>();
         botonTipoPedido = (ToggleButton) findViewById(R.id.botonTipoCena);
         textoPedidos = (TextView) findViewById(R.id.textoPedidos);
         botonAgregar = (Button) findViewById(R.id.buttonAgregar);
         botonConfirmar = (Button) findViewById(R.id.buttonConfirmar);
         botonReiniciar = (Button) findViewById(R.id.buttonReiniciar);
-        listaProductos = (ListView) findViewById(R.id.listViewProductos);
+        listViewListaProductos = (ListView) findViewById(R.id.listViewProductos);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radioButtonPlato = (RadioButton) findViewById(R.id.radioButtonComida);
         radioButtonPostre = (RadioButton) findViewById(R.id.radioButtonPostre);
         radioButtonBebida = (RadioButton) findViewById(R.id.radioButtonBebida);
+        spinnerHorarios = (Spinner) findViewById(R.id.spinnerHorarios);
 
+        iniciarListas();
+        listaElementos.addAll(Arrays.asList(listaPlatos));
 
-        adaptador = new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,listaElementos);
+        adaptadorListView = new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,listaElementos);
+        adaptadorSpinner = ArrayAdapter.createFromResource(this,R.array.horarios_array, simple_spinner_item);
+        adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 
         radioGroup.setOnCheckedChangeListener(this);
         botonAgregar.setOnClickListener(this);
         botonConfirmar.setOnClickListener(this);
         botonReiniciar.setOnClickListener(this);
         botonTipoPedido.setOnClickListener(this);
-        listaProductos.setAdapter(adaptador);
+        listViewListaProductos.setAdapter(adaptadorListView);
+        spinnerHorarios.setAdapter(adaptadorSpinner);
 
 
 
@@ -81,22 +85,23 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-        listaProductos.clearChoices();
+        listViewListaProductos.clearChoices();
+        listViewListaProductos.setItemChecked(-1, true);
+        listaElementos.clear();
         switch (checkedId){
             case 0:
                 listaElementos.addAll(Arrays.asList(listaPlatos));
-
                 break;
             case 1:
                 listaElementos.addAll(Arrays.asList(listaPostre));
                 break;
             case 2:
                 listaElementos.addAll(Arrays.asList(listaBebidas));
-
                 break;
             default:
                 break;
         }
+        adaptadorListView.notifyDataSetChanged();
     }
 
     @Override

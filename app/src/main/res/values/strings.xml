@@ -15,7 +15,13 @@
     <string name="labelRadioComida">Comida</string>
     <string name="labelRadioBebida">Bebida</string>
 
-
+    <string-array name="horarios_array">
+        <item>20:00</item>
+        <item>20:30</item>
+        <item>21:00</item>
+        <item>21:30</item>
+        <item>22:00</item>
+    </string-array>
 
 
 
