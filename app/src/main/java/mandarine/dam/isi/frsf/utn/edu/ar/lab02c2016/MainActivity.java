@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         spinnerHorarios = (Spinner) findViewById(R.id.spinnerHorarios);
 
         iniciarListas();
-        listaElementos.addAll(Arrays.asList(listaPlatos));
 
         adaptadorListView = new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,listaElementos);
         adaptadorSpinner = ArrayAdapter.createFromResource(this,R.array.horarios_array, simple_spinner_item);
@@ -89,13 +88,13 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         listViewListaProductos.setItemChecked(-1, true);
         listaElementos.clear();
         switch (checkedId){
-            case 0:
+            case R.id.radioButtonComida:
                 listaElementos.addAll(Arrays.asList(listaPlatos));
                 break;
-            case 1:
+            case R.id.radioButtonPostre:
                 listaElementos.addAll(Arrays.asList(listaPostre));
                 break;
-            case 2:
+            case R.id.radioButtonBebida:
                 listaElementos.addAll(Arrays.asList(listaBebidas));
                 break;
             default:
