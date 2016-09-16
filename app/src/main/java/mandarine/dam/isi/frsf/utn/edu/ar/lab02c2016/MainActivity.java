@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         iniciarListas();
 
         adaptadorListView = new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,listaElementos);
+        listViewListaProductos.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         adaptadorSpinner = ArrayAdapter.createFromResource(this,R.array.horarios_array, simple_spinner_item);
         adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
