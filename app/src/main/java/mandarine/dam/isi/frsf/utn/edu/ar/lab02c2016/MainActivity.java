@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 break;
         }
         adaptadorListView.notifyDataSetChanged();
+        listViewListaProductos.smoothScrollToPosition(0);
     }
 
     @Override
