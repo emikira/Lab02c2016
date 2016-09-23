@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         }
         adaptadorListView.notifyDataSetChanged();
         listViewListaProductos.smoothScrollToPosition(0);
+        posicionElementoSeleccionado=-1;
+
     }
 
     @Override
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private void toastError(String msj) {
         Context context = getApplicationContext();
         CharSequence text = msj;
-        int duration = Toast.LENGTH_LONG;
+        int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context,text,duration);
         toast.show();
