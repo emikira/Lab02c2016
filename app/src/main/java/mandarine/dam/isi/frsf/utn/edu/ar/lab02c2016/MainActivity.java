@@ -1,7 +1,9 @@
 package mandarine.dam.isi.frsf.utn.edu.ar.lab02c2016;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private ElementoMenu[] listaPlatos;
     private ElementoMenu[] listaPostre;
     private ArrayList<ElementoMenu> listaElementos;
+    private int posicionElementoSeleccionado = -1;
+    private Double sumaTotal=.0;
     private ArrayList<String> listaHorarios;
     private ToggleButton botonTipoPedido;
     private TextView textoPedidos;
@@ -75,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         botonConfirmar.setOnClickListener(this);
         botonReiniciar.setOnClickListener(this);
         botonTipoPedido.setOnClickListener(this);
+        listViewListaProductos.setOnItemClickListener(this);
         listViewListaProductos.setAdapter(adaptadorListView);
         spinnerHorarios.setAdapter(adaptadorSpinner);
 
@@ -108,11 +114,51 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()){
+            case R.id.buttonAgregar:
+
+                if(posicionElementoSeleccionado>=0){
+
+                    textoPedidos.append(listaElementos.get(posicionElementoSeleccionado).toString()+"\n");
+                    sumaTotal += listaElementos.get(posicionElementoSeleccionado).getPrecio();
+                    posicionElementoSeleccionado = -1;
+                    listViewListaProductos.clearChoices();
+
+                }
+                else
+                    toastError("No seleccionó un elemento del menú");
+                break;
+            case R.id.buttonConfirmar:
+
+                textoPedidos.append("\nTOTAL: "+f.format(sumaTotal)+"\n");
+
+                break;
+
+            case R.id.buttonReiniciar:
+
+                textoPedidos.setText("");
+                sumaTotal = .0;
+
+                break;
+
+        }
+
+    }
+
+    private void toastError(String msj) {
+        Context context = getApplicationContext();
+        CharSequence text = msj;
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context,text,duration);
+        toast.show();
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        posicionElementoSeleccionado = position;
 
     }
 
