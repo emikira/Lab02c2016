@@ -3,7 +3,6 @@ package mandarine.dam.isi.frsf.utn.edu.ar.lab02c2016;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -121,26 +120,20 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         switch (v.getId()){
             case R.id.buttonAgregar:
 
-                if(posicionElementoSeleccionado>=0){
-
-                    textoPedidos.append(listaElementos.get(posicionElementoSeleccionado).toString()+"\n");
-                    sumaTotal += listaElementos.get(posicionElementoSeleccionado).getPrecio();
-                    posicionElementoSeleccionado = -1;
-                    listViewListaProductos.clearChoices();
-
-                }
+                if(flagConfirmado==1)
+                    toastError(getString(R.string.errorConfirmado));
                 else
-                    toastError("No seleccionó un elemento del menú");
+                    agregar();
+
                 break;
             case R.id.buttonConfirmar:
 
-               /*if(textoPedidos.getText() != "" && textoPedidos.getText() != null){
-                    textoPedidos.setText("");
-                }*/
                 if(flagConfirmado == 0){
                     flagConfirmado = 1;
                     textoPedidos.append("\nTOTAL: "+f.format(sumaTotal)+"\n");
                 }
+                else
+                    toastError(getString(R.string.errorConfirmado));
 
                 break;
 
@@ -155,7 +148,18 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         }
 
     }
+    private void agregar(){
+        if(posicionElementoSeleccionado>=0){
 
+            textoPedidos.append(listaElementos.get(posicionElementoSeleccionado).toString()+"\n");
+            sumaTotal += listaElementos.get(posicionElementoSeleccionado).getPrecio();
+            posicionElementoSeleccionado = -1;
+            listViewListaProductos.clearChoices();
+
+        }
+        else
+            toastError(getString(R.string.errorSeleccion));
+    }
     private void toastError(String msj) {
         Context context = getApplicationContext();
         CharSequence text = msj;

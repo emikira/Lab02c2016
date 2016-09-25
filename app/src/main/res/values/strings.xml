@@ -14,6 +14,8 @@
     <string name="labelRadioPostre">Postre</string>
     <string name="labelRadioComida">Comida</string>
     <string name="labelRadioBebida">Bebida</string>
+    <string name="errorSeleccion">No seleccionó ningún elemento del menú</string>
+    <string name="errorConfirmado">El pedido ya fue confirmado. Si quiere realizar otro pedido, presione Reiniciar</string>
 
     <string-array name="horarios_array">
         <item>20:00</item>
