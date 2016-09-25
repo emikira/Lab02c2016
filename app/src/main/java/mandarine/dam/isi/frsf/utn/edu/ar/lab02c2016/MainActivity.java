@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private ArrayAdapter<ArrayList> adaptadorListView;
     private ArrayAdapter<CharSequence> adaptadorSpinner;
 
+    private int flagConfirmado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         radioButtonPostre = (RadioButton) findViewById(R.id.radioButtonPostre);
         radioButtonBebida = (RadioButton) findViewById(R.id.radioButtonBebida);
         spinnerHorarios = (Spinner) findViewById(R.id.spinnerHorarios);
+        flagConfirmado = 0;
 
         iniciarListas();
 
@@ -132,7 +134,13 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 break;
             case R.id.buttonConfirmar:
 
-                textoPedidos.append("\nTOTAL: "+f.format(sumaTotal)+"\n");
+               /*if(textoPedidos.getText() != "" && textoPedidos.getText() != null){
+                    textoPedidos.setText("");
+                }*/
+                if(flagConfirmado == 0){
+                    flagConfirmado = 1;
+                    textoPedidos.append("\nTOTAL: "+f.format(sumaTotal)+"\n");
+                }
 
                 break;
 
@@ -140,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 
                 textoPedidos.setText("");
                 sumaTotal = .0;
+                this.flagConfirmado = 0;
 
                 break;
 
